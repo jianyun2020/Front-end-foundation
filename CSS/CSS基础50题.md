@@ -60,3 +60,47 @@ css选择器：
 优先级(就近原则)：!important > [id > class > tag]
 
 !important 比内联优先级高
+
+4. CSS优先级算法是如何计算的？
+
+《CSS REFACTORING》 中提到了算法的过程：
+
+> A specificity is determined by plugging numbers into (a, b, c, d):
+> 1. If the styles are applied via the style attribute, a=1; otherwise, a=0.
+> 2. b is equal to the number of ID selectors present.
+> 3. c is equal to the number of class selectors, attribute selectors, and pseudoclasses present.
+> 4. d is equal to the number of type selectors and pseudoelements present.
+
+简单来说就是，优先级是由 a, b, c, d 的值来决定的，其中它们的值计算规则如下：
+
+1. 如果存在内联样式，那么 a = 1, 否则 a = 0;
+2. b 的值等于 ID选择器 出现的次数;
+3. c 的值等于 类选择器 和 属性选择器 和 伪类 出现的总次数;
+4. d 的值等于 标签选择器 和 伪元素 出现的总次数 。
+
+例如：
+
+`#nav-global > ul > li > a.nav-link`
+
+通过上述算法计算，依次求出a, b, c, d的值:
+
+1. 没有内联样式：a = 0
+2. ID选择器共出现1次，b = 1
+3. 类选择器出现1次，属性选择器出现0次，伪类选择器出现0次，c = (1 + 0 + 0)
+4. 标签选择器出现3次，d = 3
+
+简记为：(0, 1, 1, 3)
+
+如果使用了`!important`，则优先级最高，此为特殊情况。
+
+5. CSS3新增伪类有那些?
+
+- p:first-of-type：选择属于其父元素的首个元素
+- p:last-of-type：选择属于其父元素的最后一个元素
+- p:only-of-type：选择属于其父元素的唯一子元素
+- p:only-child：选择属于其父元素的唯一子元素
+- p:nth-child(2)：选择属于其父元素的第二个子元素
+- :enabled, :disabled：表单控件的禁用状态
+- :checked：单选框或复选框被选中
+
+6. 
