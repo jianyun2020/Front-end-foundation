@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flex布局</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    ul {
+      list-style: none;
+    }
+    .main {
+      margin: 20px;
+    }
+
+    .box {
+      display: flex;
+      background: royalblue;
+      width: 600px;
+      flex-direction: column-reverse;
+    }
+    .box li {
+      width: 100px;
+      height: 100px;
+      line-height: 100px;
+      color: #fff;
+      background-color: #E88024;
+      text-align: center;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <body>
+    <div class="main">
+      <ul class="box">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+      </ul>
+    </div>
+  </body>
+</body>
+</html>

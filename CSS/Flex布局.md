@@ -33,38 +33,17 @@
 属性值有以下4个：
 
 - `row`(默认值)：主轴为水平方向，起点在左端
+
+![](../images/row.png)
+
 - `row-reverse`：主轴为水平方向，起点在右端
+
+![](../images/row_reverse.png)
+
 - `column`：主轴为垂直方向，起点在上沿
+
+![](../images/column.png)
+
 - `column-reverse`：主轴为垂直方向，起点在下沿
 
-
-<head>
-  <style>
-    ul {
-      list-style: none;
-    }
-    .box {
-      display: flex;
-      background: #fff;
-      width: 300px;
-    }
-    .box li {
-      width: 50px;
-      height: 50px;
-      line-height: 50px;
-      color: #fff;
-      background-color: #E88024;
-      text-align: center;
-      margin: 5px;
-    }
-  </style>
-</head>
-<body>
-  <ul class="box">
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-  </ul>
-</body>
+![](../images/column_reverse.png)
