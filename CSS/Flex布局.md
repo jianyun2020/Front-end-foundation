@@ -2,7 +2,7 @@
 
 采用 Flex 布局的元素，称为 Flex 容器（flex container），简称"容器"。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称"项目"。 
 
-*注意，设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。*
+*注意，设为 Flex 布局以后，子元素的`float`、`clear`和`vertical-align`属性将失效。*
 
 ![](../images/flex01.png)
 
@@ -32,7 +32,7 @@
 
 属性值有以下4个：
 
-- row(默认值)：主轴为水平方向，起点在左端
-- row-reverse：主轴为水平方向，起点在右端
-- column：主轴为垂直方向，起点在上沿
-- column-reverse：主轴为垂直方向，起点在下沿
+- `row`(默认值)：主轴为水平方向，起点在左端
+- `row-reverse`：主轴为水平方向，起点在右端
+- `column`：主轴为垂直方向，起点在上沿
+- `column-reverse`：主轴为垂直方向，起点在下沿
