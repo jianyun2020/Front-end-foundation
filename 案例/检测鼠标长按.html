@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>检测鼠标长按</title>
+  <style>
+    .box {
+      width: 100vw;
+      height: 100vh;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box"></div>
+  
+  <script>
+    let body = document.querySelector('.box')
+
+    let timeStart, timeEnd, time;
+
+    function getTimeNow () {
+      let now = new Date()
+      return now.getTime()
+    }
+
+    function holdDown () {
+      timeStart = getTimeNow()
+      time = setInterval(() => {
+        timeEnd = getTimeNow()
+        if (timeEnd - timeStart > 1000) {
+          clearInterval(time)
+          console.log('长按')
+          alert('长按')
+        }
+      }, 100)
+    }
+
+    function holdUp () {
+      clearInterval(time)
+    }
+
+    body.addEventListener('mousedown', () => {
+      holdDown()
+    })
+
+    body.addEventListener('mouseup', () => {
+      holdUp()
+    })
+  </script>
+</body>
+</html>
