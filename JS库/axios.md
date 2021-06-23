@@ -223,5 +223,35 @@ const instance = axios.create({
   url: '/user', // 用于请求的服务器的URL
   method: 'get', // 创建请求时使用的方法，默认get
   baseURL: 'https://example.com/api/', // 会自动加在url前面，除非url是绝对URL
+
+  // transformRequest可以在向服务器发送前修改请求数据
+  // 只能用于PUT, POST, PATCH
+  // 数组中最后一个函数必须返回一个字符串，一个Buffer实例，ArrayBuffer, FormData 或 Stream
+  // 可以修改请求头
+  transformRequest: [function (data, headers) {
+    // 对发送的data进行任意转换处理
+    return data;
+  }],
+  
+  // transformResponse在传递给then/catch前，允许修改响应数据
+  transformResponse: [function (data) {
+    // 对接收的data进行任意转换处理
+    return data;
+  }],
+
+  // 自定义请求头
+  headers: {'X-Requested-With': 'XMLHttpRequest'},
+  
+  // params是与请求一起发送的URL参数
+  // 必须是一个简单的对象或URLSearchParams对象
+  params: {
+    ID: 12345
+  },
+
+  // 主要用于序列化params，可选
+  // (e.g. https://www.npmjs.com/package/qs, http://api.jquery.com/jquery.param/)
+  paramsSerializer: function (params) {
+    return Qs.stringify(params, { arrayFormat: 'brackets' })
+  }
 }
 ```
