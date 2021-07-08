@@ -3,3 +3,5 @@
 let params =  new URLSearchParams(location.search);
 // 主标题
 let mainHeading = params.get('mainHeading');
+
+c
