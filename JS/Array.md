@@ -1,0 +1,1 @@
+[].slice.call(arguments)能将具有length属性的对象转成数组：
