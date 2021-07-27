@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    const app = Vue.createApp({
+      data () {
+        return {
+          list: [],
+          inputValue: ''
+        }
+      },
+      methods: {
+        handleAddItem () {
+          this.list.push(this.inputValue)
+          this.inputValue = ''
+        }
+      },
+      template: `
+      <div>
+        <my-title />
+          <input v-model="inputValue" />
+          <button v-on:click="handleAddItem">添加佳丽</button>     
+          <ul>
+            <my-jiali v-for="(item, index) of list" v-bind:item="item" v-bind:index="index" />
+          </ul>
+        </div>
+      `
+    })
+
+    app.component('my-title', {
+      template: `<h1>我是标题</h1>`
+    })
+
+    app.component('my-jiali', {
+      props: ['item', 'index'],
+      template: `
+        <li>{{ index }}---{{ item }}</li>
+      `
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+</html>

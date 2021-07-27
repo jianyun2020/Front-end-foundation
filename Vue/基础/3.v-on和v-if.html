@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    Vue.createApp({
+      data () {
+        return {
+          count: '',
+          setMeal: '帝王套餐~',
+          isShowMeal: false
+        }
+      },
+      methods: {
+        welcomeBtnClick () {
+          this.count = '欢迎光临~'
+        },
+        bydBtnClick () {
+          this.count = '欢迎再次光临~'
+        },
+        showOrHideBtnClick () {
+          this.isShowMeal = !this.isShowMeal
+        }
+      },
+      template: `
+      <div>
+        <div>{{ count }}</div>
+        <button v-on:click="welcomeBtnClick">有顾客来</button>
+        <button v-on:click="bydBtnClick">顾客离开</button>
+
+        <div>
+          <div v-if="isShowMeal">{{ setMeal }}</div>
+          <button v-on:click="showOrHideBtnClick">显示/隐藏套餐</button>
+        </div>
+      </div>
+      `
+    }).mount('#app')
+  </script>
+</body>
+</html>
