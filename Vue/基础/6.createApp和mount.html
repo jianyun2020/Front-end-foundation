@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    const app = Vue.createApp({
+
+    })
+
+    const vm = app.mount("#app") // Proxy形式的对象
+    console.log(vm)
+
+    /*
+      MVVM设计模式：
+        M: 代表Model(数据)
+        V: 代表View(数据)
+        VM: ViewModel(视图数据连接层)
+    */
+  </script>
+</body>
+</html>
