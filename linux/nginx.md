@@ -105,3 +105,4 @@ sudo vim /etc/nginx/sites-enabled/default
 # 访问IP地址出现
 
 ![](images/test.png)
+
