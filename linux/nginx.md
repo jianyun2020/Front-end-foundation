@@ -2,19 +2,19 @@
 - [项目配置](#项目配置)
 - [关闭默认占用的80端口](#关闭默认占用的80端口)
 - [重启nginx服务](#重启nginx服务)
-- [访问IP地址出现](#访问ip地址出现)
+- [访问IP地址出现 H5网页](#访问ip地址出现-h5网页)
 # 安装Nginx
 
 > 以Ubuntu为例
 
 - 安装
 ```
-sudo apt install nginx
+sudo yum -y install nginx
 ```
 
 - 查看nginx版本
 ```
-nginx-v
+nginx -v
 ```
 出现版本号表示成功
 
@@ -71,23 +71,12 @@ sudo systemctl start nginx
 
 将项目文件放入`/mnt/d/linux/test`(配置文件中填写的路径)
 
-将index.html文件放入`/mnt/d/linux/test`路径中
+将之前给的H5项目文件放入对应的文件夹放入`/mnt/d/linux/test`路径中
 
-以下是index.html文件内容：
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  nginx测试页面
-</body>
-</html>
-```
+*注意：index.html一定要放在根目录，比如test文件夹中，包含了以下文件*
+
+![](images/h5.png)
+
 
 # 关闭默认占用的80端口
 
@@ -102,7 +91,4 @@ sudo vim /etc/nginx/sites-enabled/default
 
 `sudo systemctl restart nginx`
 
-# 访问IP地址出现
-
-![](images/test.png)
-
+# 访问IP地址出现 H5网页

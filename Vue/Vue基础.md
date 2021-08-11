@@ -7,6 +7,7 @@
   - [事件修饰符](#事件修饰符)
     - [stop修饰符](#stop修饰符)
     - [self修饰符](#self修饰符)
+- [Non-props属性](#non-props属性)
 
 # 模板动态参数
 
@@ -142,3 +143,9 @@ template:`
 ```
 
 这样当点击我是最外层的DIV文字时，就会触犯handleBtnClick1方法了。
+
+# Non-props属性
+
+父组件传递的属性，且子组件没有用props接收（可用inheritAttrs: false进制子组件接收父组件传递的属性）
+
+`$attrs`包含父组件传递的所有属性
