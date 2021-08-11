@@ -8,6 +8,20 @@
     - [stop修饰符](#stop修饰符)
     - [self修饰符](#self修饰符)
 - [Non-props属性](#non-props属性)
+- [`$emit用法`](#emit用法)
+  - [对传递值的校验](#对传递值的校验)
+- [插槽slot](#插槽slot)
+- [插槽默认值](#插槽默认值)
+  - [具名插槽](#具名插槽)
+  - [作用域插槽](#作用域插槽)
+- [动态组件](#动态组件)
+- [异步组件](#异步组件)
+- [多级组件传值provide和inject](#多级组件传值provide和inject)
+- [动画](#动画)
+  - [使用JS编写动画效果](#使用js编写动画效果)
+  - [双DOM元素动画实现](#双dom元素动画实现)
+    - [mode属性](#mode属性)
+    - [appear属性](#appear属性)
 
 # 模板动态参数
 
@@ -149,3 +163,247 @@ template:`
 父组件传递的属性，且子组件没有用props接收（可用inheritAttrs: false进制子组件接收父组件传递的属性）
 
 `$attrs`包含父组件传递的所有属性
+
+# `$emit用法`
+
+子组件调用父组件方法，且可以传值：
+
+```js
+emit: ['响应事件名'],
+methods: {
+  childClick() {
+    this.$emit('响应事件名', '传给父组件的值')
+  }
+},
+template: `<button @click="childClick">子组件按钮</button>`
+```
+
+父组件：
+
+```js
+methods: {
+  handleClick(params) {
+    // params是子组件通过$emit传递的值
+  }
+},
+template: `<button @响应事件名="handleClick">父组件按钮</button>`
+
+```
+
+## 对传递值的校验
+
+```js
+emits: {
+  '响应事件名': (value) => {
+    return ...
+  }
+}
+```
+
+# 插槽slot
+
+# 插槽默认值
+
+```js
+<div>
+  <slot>
+    // ... 默认值
+  </slot>
+</div>
+```
+
+## 具名插槽
+
+```js
+<div>
+  <slot name="one"></slot>
+  <slot name="two"></slot>
+</div>
+
+
+// 使用
+
+<template v-slot:one>...</template>
+<template #two>...</template>  // 简写方式：用 # 代替v-slot:
+```
+
+## 作用域插槽
+
+```js
+// 1.基础代码
+// List组件
+template: `
+  <div>
+    <div v-for="item in list">{{item}}</div>
+  </div>
+`
+
+// 2.目前子组件里循环使用的是<div>标签，现在要求这个标签是父组件调用时确定，也就是要使用插槽了。（需要说明，这种情况在你写组件时，经常遇到，所以你要足够的重视）。
+// List组件
+template: `
+  <div>
+    <slot v-for="item in list" />
+  </div>
+`
+
+// 父组件调用
+template: `
+  <list>
+    <span></span> // 传递span标签
+  </list>
+`
+
+```
+
+- 父组件使用子组件插槽中的值
+
+```js
+// 通过 : 绑定的形式进行传递
+// List组件
+template: `
+  <div>
+    <slot v-for="item in list" :item="item />
+  </div>
+`
+
+// 父组件
+template: `
+  <list v-slot="props">
+    <span>{{props.item}}</span>
+  </list>
+`
+// 父组件-使用ES6解构简化
+template: `
+  <list v-slot="{item}">
+    <span>{{item}}</span>
+  </list>
+`
+```
+
+*注意这里的props是子组件传递过来的数据都是对象*
+
+# 动态组件
+
+```js
+<keep-alive>
+  <component :is="showItem">
+</keep-alive>
+```
+
+# 异步组件
+
+异步组件就是在调用组件时，这个组件并不立即渲染，而是要等带一些业务逻辑完成后，才会进行执行组件内的逻辑和渲染到页面上。
+
+```js
+app.component('async-component', Vue.defineAsyncComponent(() => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        template: `<div>这是一个异步组件</div>`
+      })
+    }, 3000)
+  })
+}))
+```
+
+# 多级组件传值provide和inject
+
+父组件向子组件传值
+
+```js
+// 父组件
+provide: {
+  name: '测试'
+}
+
+// 子组件
+inject: ['name']
+```
+
+
+# 动画
+
+```js
+<transition
+  enter-active-class=""
+  leave-active-class=""
+  type="animation" or "transition"
+  :duration="1000" // 1秒后结束动画和过渡
+  // 还可写对象-- :duration="{enter: 1000, leave: 3000}"
+  :css="false" // 指定不适用css动画
+></transition>
+```
+
+## 使用JS编写动画效果
+
+- before-enter钩子函数：动画开始前执行函数
+- enter钩子函数：动画进入时
+- after-enter钩子函数
+- before-leave :离场动画执行之前
+- leave：开始执行离场动画
+- leave-after: 离场动画执行结束
+
+```js
+methods: {
+  handleBeforeEnter(element) {
+    element.style.color = "red"
+  },
+  handleEnterActive(element, done) {
+    const timer = setInterval(() => {
+      const color = element.style.color;
+      if (color == 'red') {
+        element.style.color = "green"
+      } else {
+        element.style.color = "red"
+      }
+    }, 500)
+
+    setTimeout(() => {
+      clearInterval(timer);
+      done() // 动画执行结束后通知执行下一个钩子函数after-enter
+    }, 1500)
+  },
+  handleEnterEnd() {
+    alert('入场动画结束')
+  }
+},
+template: `
+<transition
+  :css="false"
+  @before-enter="handleBeforeEnter"
+  @enter="handleEnterActive"
+  @after-enter="handleEnterEnd"
+></transition>
+`
+```
+
+## 双DOM元素动画实现
+
+### mode属性
+
+> mode="out-in"：先显示离场动画，在显示入场动画
+> 
+> mode="in-out": 先显示入场动画，在显示离场动画
+
+
+```js
+template: `
+  <transition mode="out-in">
+    <div v-if="isShow">出场</div>
+    <div v-else>入场</div>
+  </transition>
+`
+```
+
+### appear属性
+
+appear属性的意思是初次对某一个元素进行默认显示的时候也进行动画显示。
+
+```js
+template: `
+  <transition
+    appear
+  ></transition>
+`
+```
+
