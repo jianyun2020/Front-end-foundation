@@ -1,0 +1,3 @@
+DOMString是一个UTF-16字符串。由于JavaScript已经使用了这样的字符串，所以DOMString直接映射到一个String。
+
+将null传递给接受DOMString的方法或参数时通常会把其stringifies为"null"
