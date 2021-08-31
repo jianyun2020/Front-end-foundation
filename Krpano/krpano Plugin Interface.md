@@ -105,3 +105,11 @@
      }
  }
 ```
+
+# The krpano Plugin Interface
+
+These are the interface functions of the plugin that will be called from krpano. In HTML5/JavaScript these functions must be members of a globally function object named `krpanoplugin`. All code need to be within that function, everything outside will get stripped.
+
+```xml
+krpanoplugin.registerplugin(krpanointerface, pluginpath, pluginobject)
+```
