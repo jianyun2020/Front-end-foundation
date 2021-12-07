@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    ul {
+      list-style:none;
+    }
+    ul li {
+      position: relative;
+      left: 10px;
+    }
+
+    ul li a::before {
+      content: "";
+      width: 4px;
+      height: 4px;
+      background-color: #ddd;
+      position: absolute;
+      left: -5px;
+      top: -3px;
+      top: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <hr />
+    <h3>军事·航空</h3>
+    <img src="./题目/3.新闻列表.png" alt="">
+    <ul>
+      <li><a href="javascript:;">美军镜面涂装F-22战机又出新图了 太闪了</a></li>
+      <li><a href="javascript:;">“飞鲨”路基全流程演练 超70个专业！</a></li>
+      <li><a href="javascript:;">王亚平换发型了！Tony是谁？</a></li>
+    </ul>
+  </div>
+</body>
+</html>
